@@ -1,0 +1,36 @@
+<table class="table table-striped">
+  <thead class="table-dark">
+    <tr>
+      <th>Flavor</th>
+      <th>Price</th>
+      <th>Popularity</th>
+      <th>Stock</th>          
+      <th class="text-center">Sell</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% juices.each do |juice| %>
+      <tr>
+        <td><%= juice.flavor %></td>
+        <td><%= number_to_currency(juice.price) %></td>
+        <td><%= juice.popularity %></td>
+        <td>
+          <% if juice.scarcity_level >= ScarcityEngine::CRITICAL %>
+            <span class="badge bg-danger">Out ⚠︎</span>
+          <% elsif juice.scarcity_level.positive? %>
+            <span class="badge bg-warning text-dark">Scarce</span>
+          <% else %>
+            <span class="badge bg-success">Plentiful</span>
+          <% end %>
+        </td>
+        <td class="text-center">
+          <%= button_to "Sell",
+                sell_juice_path(juice),
+                method: :post,
+                class: "btn btn-sm btn-success" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

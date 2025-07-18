@@ -1,0 +1,7 @@
+<% flash.each do |type, message| %>
+  <div class="flash-banner alert alert-<%= type == "notice" ? "info" : "danger" %> shadow-sm"
+       data-controller="flash"
+       data-flash-timeout-value="2500">
+    <strong>🧃 BREAKING:</strong> <%= message %>
+  </div>
+<% end %>

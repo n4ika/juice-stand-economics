@@ -1,0 +1,37 @@
+<div class="container my-5">
+  <%= link_to "← Dashboard", root_path, class: "btn btn-outline-primary mb-3" %>
+  <h1>⚡ Transactions</h1>
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Juice</th>
+        <th>Customer</th>
+        <th>Consequence</th>
+        <th>When</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @transactions.each do |tx| %>
+        <tr>
+          <td><%= tx.id %></td>
+          <td><%= link_to tx.juice.flavor, juice_path(tx.juice), class: "text-decoration-none" %></td>
+          <td>
+            <% if tx.customer %>
+              <%= link_to tx.customer.name, customer_path(tx.customer), class: "text-decoration-none" %>
+            <% else %>
+              —  
+            <% end %>
+          </td>
+          <td><%= tx.consequence %></td>
+          <td><%= tx.created_at.strftime("%b %d, %Y %H:%M") %></td>
+          <td class="text-center">
+            <%= link_to "Show", transaction_path(tx), class: "btn btn-sm btn-outline-secondary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

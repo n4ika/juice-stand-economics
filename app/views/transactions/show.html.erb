@@ -1,0 +1,28 @@
+<div class="container my-5">
+  <div class="mb-3">
+    <%= link_to "← Back to Transactions", transactions_path, class: "btn btn-outline-secondary me-2" %>
+    <%= link_to "Dashboard", root_path, class: "btn btn-outline-primary" %>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      ⚡ Transaction #<%= @transaction.id %>
+    </div>
+    <div class="card-body">
+      <p><strong>Juice:</strong>
+        <%= link_to @transaction.juice.flavor, juice_path(@transaction.juice) %>
+      </p>
+      <p><strong>Customer:</strong>
+        <% if @transaction.customer %>
+          <%= link_to @transaction.customer.name, customer_path(@transaction.customer) %>
+        <% else %>
+          —  
+        <% end %>
+      </p>
+      <p><strong>Consequence:</strong> <%= @transaction.consequence %></p>
+      <p><strong>Created At:</strong>
+        <%= @transaction.created_at.strftime("%b %d, %Y at %H:%M") %>
+      </p>
+    </div>
+  </div>
+</div>

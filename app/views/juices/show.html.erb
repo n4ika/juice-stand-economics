@@ -1,0 +1,32 @@
+<div class="container my-5">
+  <!-- Back buttons -->
+  <div class="mb-3">
+    <%= link_to "← Back to Juices", juices_path, class: "btn btn-outline-secondary me-2" %>
+    <%= link_to "Dashboard", root_path, class: "btn btn-outline-primary" %>
+  </div>
+
+  <div class="card">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h2 class="mb-0">🍹 <%= @juice.flavor %></h2>
+      <span class="badge bg-info text-dark">Popularity: <%= @juice.popularity %></span>
+    </div>
+
+    <div class="card-body">
+      <p><strong>Price:</strong> <%= number_to_currency(@juice.price) %></p>
+      <p><strong>Created at:</strong> <%= @juice.created_at.strftime("%b %d, %Y at %H:%M") %></p>
+      <p><strong>Updated at:</strong> <%= @juice.updated_at.strftime("%b %d, %Y at %H:%M") %></p>
+    </div>
+
+    <div class="card-footer d-flex justify-content-end">
+      <%= link_to "Edit", edit_juice_path(@juice),
+            class: "btn btn-sm btn-outline-warning me-2" %>
+      <%= button_to "Delete", juice_path(@juice),
+            method: :delete,
+            data: { confirm: "Delete this juice?" },
+            class: "btn btn-sm btn-outline-danger me-2" %>
+      <%= button_to "Sell", sell_juice_path(@juice),
+            method: :post,
+            class: "btn btn-sm btn-success" %>
+    </div>
+  </div>
+</div>

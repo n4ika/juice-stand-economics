@@ -1,0 +1,5 @@
+<li class="list-group-item small">
+  <%= customer.complaint.truncate(50) %> — 
+  <%= link_to customer.name, customer_path(customer), class: "text-decoration-none" %>
+</li>
+

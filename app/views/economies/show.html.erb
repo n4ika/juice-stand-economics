@@ -1,0 +1,50 @@
+<div class="container my-5">
+  <!-- Back to Dashboard -->
+  <%= link_to "← Dashboard", root_path, class: "btn btn-outline-primary mb-3" %>
+
+  <h1 class="mb-4">🍊 Economy Dashboard</h1>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <p>
+        <strong>Chaos Status:</strong>
+        <span class="badge 
+          <%= case @economy.chaos_index
+            when 0..10 then 'bg-success'
+            when 11..50 then 'bg-warning text-dark'
+            else 'bg-danger'
+          end %>">
+          <%= @economy.chaos_status %>
+        </span>
+      </p>
+
+      <p>
+        <strong>Chaos Index:</strong>
+        <%= @economy.chaos_index %>
+      </p>
+
+      <p>
+        <strong>Inflation Rate:</strong>
+        <%= number_to_percentage(@economy.inflation * 100, precision: 2) %>
+      </p>
+
+      <% if @economy.apocalypse? %>
+        <div class="alert alert-danger">
+          ⚠️ Apocalypse has begun! All systems failing.
+        </div>
+      <% end %>
+    </div>
+
+    <div class="card-footer d-flex justify-content-between align-items-center">
+      <%= button_to "Reset Economy", reset_economy_path,
+            method: :post,
+            data: { confirm: "Really wipe the slate and start fresh?" },
+            class: "btn btn-danger" %>
+
+      <small class="text-muted">
+        Last updated:
+        <%= @economy.updated_at.strftime("%b %d, %Y at %H:%M") %>
+      </small>
+    </div>
+  </div>
+</div>

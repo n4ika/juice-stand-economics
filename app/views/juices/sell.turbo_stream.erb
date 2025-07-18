@@ -1,0 +1,20 @@
+<%= turbo_stream.update "economy-panel" do %>
+  <%= render partial: "shared/economy", locals: { economy: @economy } %>
+<% end %>
+
+<%= turbo_stream.update "mayhem-list" do %>
+    <%= render partial: "home/mayhem_row", collection: @recent_transactions, as: :transaction %>
+<% end %>
+
+<%= turbo_stream.update "complaints-list" do %>
+    <%= render partial: "home/complaint_row", collection: @recent_customers, as: :customer %>
+<% end %>
+
+
+<%= turbo_stream.prepend "flash" do %>
+  <%= render partial: "shared/flash" %>
+<% end %>
+
+<%= turbo_stream.update "juice-panel" do %>
+  <%= render partial: "home/juices", locals: { juices: @juices } %>
+<% end %>

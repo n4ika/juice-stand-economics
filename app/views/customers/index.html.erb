@@ -1,0 +1,31 @@
+<div class="container my-5">
+  <%= link_to "← Dashboard", root_path, class: "btn btn-outline-primary mb-3" %>
+  <h1>🤔 Customers</h1>
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Mood</th>
+        <th>Complaint</th>
+        <th>When</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= customer.id %></td>
+          <td><%= link_to customer.name, customer_path(customer), class: "text-decoration-none" %></td>
+          <td><%= customer.mood %></td>
+          <td><%= truncate(customer.complaint, length: 30) %></td>
+          <td><%= customer.created_at.strftime("%b %d, %Y %H:%M") %></td>
+          <td class="text-center">
+            <%= link_to "Show", customer_path(customer), class: "btn btn-sm btn-outline-secondary" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

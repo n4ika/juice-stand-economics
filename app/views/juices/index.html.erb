@@ -1,0 +1,45 @@
+<div class="container my-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>🍊 Juices</h1>
+    <%= link_to "New Juice", new_juice_path, class: "btn btn-primary" %>
+  </div>
+
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>Flavor</th>
+        <th>Price</th>
+        <th>Popularity</th>
+        <th>Stock</th>  
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @juices.each do |juice| %>
+        <tr>
+          <td><%= link_to juice.flavor, juice_path(juice), class: "text-decoration-none" %></td>
+          <td><%= number_to_currency(juice.price) %></td>
+          <td><%= juice.popularity %></td>
+          <td>
+            <% if juice.scarcity_level >= ScarcityEngine::CRITICAL %>
+              <span class="badge bg-danger">Out ⚠︎</span>
+            <% elsif juice.scarcity_level.positive? %>
+              <span class="badge bg-warning text-dark">Scarce</span>
+            <% else %>
+              <span class="badge bg-success">Plentiful</span>
+            <% end %>
+          </td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm gap-1" role="group">
+              <%= link_to "Show",   juice_path(juice),       class: "btn btn-secondary" %>
+              <%= link_to "Edit",   edit_juice_path(juice),  class: "btn btn-warning"  %>
+              <%= link_to "Delete", juice_path(juice),
+                    data:  { turbo_method: :delete, confirm: "Delete this juice?" },
+                    class: "btn btn-danger" %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

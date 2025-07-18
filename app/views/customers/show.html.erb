@@ -1,0 +1,22 @@
+<div class="container my-5">
+  <div class="mb-3">
+    <%= link_to "← Back to Customers", customers_path, class: "btn btn-outline-secondary me-2" %>
+    <%= link_to "Dashboard", root_path, class: "btn btn-outline-primary" %>
+  </div>
+
+  <div class="card">
+    <div class="card-header">
+      🤔 Customer: <%= @customer.name %>
+    </div>
+    <div class="card-body">
+      <p><strong>Mood:</strong> <%= @customer.mood %></p>
+      <p><strong>Complaint:</strong> <%= @customer.complaint %></p>
+      <p><strong>First Seen:</strong>
+        <%= @customer.created_at.strftime("%b %d, %Y at %H:%M") %>
+      </p>
+      <p><strong>Last Updated:</strong>
+        <%= @customer.updated_at.strftime("%b %d, %Y at %H:%M") %>
+      </p>
+    </div>
+  </div>
+</div>

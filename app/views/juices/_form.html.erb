@@ -1,0 +1,21 @@
+<%= form_with model: juice, local: true do |f| %>
+  <div class="mb-3">
+    <%= f.label :flavor, class: "form-label" %>
+    <%= f.text_field :flavor, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :price, class: "form-label" %>
+    <%= f.number_field :price, step: 0.01, class: "form-control", required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :popularity, class: "form-label" %>
+    <%= f.number_field :popularity, class: "form-control" %>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", juices_path, class: "btn btn-outline-secondary" %>
+  </div>
+<% end %>

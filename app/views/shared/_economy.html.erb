@@ -1,0 +1,17 @@
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <span>🍊 Economy Status</span>
+    <%= button_to "Reset", reset_economy_path, method: :post, class: "btn btn-sm btn-outline-danger" %>
+    </div>
+  <div class="card-body">
+    <p class="mb-2"> Inflation:
+      <strong><%= number_to_percentage(economy.inflation * 100, precision: 2) %></strong>
+    </p>
+    <p class="mb-2 <%= 'text-danger fw-bold' if economy.rare_event_count > 3 %>" title="Events like riots or eldritch accountants">
+      Rare Events Triggered:
+      <strong><%= economy.rare_event_count %></strong>
+    </p>
+    <hr>
+    <p>Chaos Level:<strong><%= economy.chaos_status %> (<%= economy.chaos_index %>)</strong></p>
+  </div>
+</div>

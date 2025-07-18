@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JuiceStandEconomicsSimulator</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
+      <div class="container">
+        <%= link_to "Juice Stand Simulator", root_path, class: "navbar-brand" %>
+        <!-- toggler omitted for brevity -->
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <%= link_to "Dashboard", root_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Manage Juices", juices_path, class: "nav-link" %>
+            <li class="nav-item">
+              <%= link_to "Transactions", transactions_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Customers", customers_path, class: "nav-link" %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Flash -->
+    <div id="flash-toast">
+      <turbo-frame id="flash">
+        <%= render 'shared/flash' %>
+      </turbo-frame>
+    </div>
+
+    <!-- Main content only -->
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
+</html>

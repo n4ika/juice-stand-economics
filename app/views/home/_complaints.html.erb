@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-header">🤔 Who’s Complaining?</div>
+  <turbo-frame id="complaints-list" class="scroll-panel d-block">
+    <ul class="list-group list-group-flush">
+      <%= render partial: "home/complaint_row",
+                 collection: customers,
+                 as: :customer %>
+    </ul>
+  </turbo-frame>
+</div>

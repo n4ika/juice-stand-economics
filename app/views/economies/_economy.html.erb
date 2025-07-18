@@ -1,0 +1,8 @@
+<div class="card mb-4">
+  <div class="card-header">🍊 Economy Status</div>
+  <div class="card-body">
+    <p><strong>Chaos:</strong> <%= economy.chaos_status %> (<%= economy.chaos_index %>)</p>
+    <p><strong>Inflation:</strong> <%= (economy.inflation * 100).round(2) %>%</p>
+    <%= button_to "Reset", reset_economy_path, method: :post, class: "btn btn-sm btn-outline-danger" %>
+  </div>
+</div>

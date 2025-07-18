@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="card-header">⚡ Latest Mayhem</div>
+  <turbo-frame id="mayhem-list" class="scroll-panel d-block">
+    <ul class="list-group list-group-flush">
+      <%= render partial: "home/mayhem_row",
+                 collection: transactions,
+                 as: :transaction %>
+    </ul>
+  </turbo-frame>
+</div>
