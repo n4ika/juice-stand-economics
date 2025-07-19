@@ -4,7 +4,7 @@ class ScarcityEngine
   MIN      = 0
 
   # Only ~5 % of sales even touch scarcity
-  SCARCITY_TICK_PROB = 0.05
+  SCARCITY_TICK_PROB = 0.10
 
   # Bump tables
   RISE  = [1, 1, 2, 3, 5]             # gentle upward pressure
@@ -19,7 +19,7 @@ class ScarcityEngine
     change =
       if juice.scarcity_level >= CRITICAL && rand < 0.30
         FALL.sample                # when scarce, more likely to fall/recover
-      elsif juice.scarcity_level.zero? && rand < 0.02
+      elsif juice.scarcity_level.zero? && rand < 0.05
         SPIKE.to_a.sample          # rare big spike from plenty
       elsif juice.scarcity_level >= CRITICAL
         FALL.sample

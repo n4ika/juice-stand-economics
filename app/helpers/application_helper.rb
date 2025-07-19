@@ -12,7 +12,10 @@ module ApplicationHelper
     # ── Royal decree (positive) ──────────────────────
     when /Monarch|Official Juice|👑/i
       "text-success fw-bold"
-
+      
+      # NEW: positive boosters
+    when /peace|bumper crop|viral dance|super‑food|subsidy|extractor/i
+      "text-success"
     else
       ""
     end

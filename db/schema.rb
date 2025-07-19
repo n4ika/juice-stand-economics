@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_07_18_191451) do
+ActiveRecord::Schema[7.1].define(version: 2025_07_18_234853) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_18_191451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "rare_event_count", default: 0
+    t.datetime "happy_hour_mark_at"
   end
 
   create_table "juices", force: :cascade do |t|
@@ -37,6 +38,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_07_18_191451) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "scarcity_level"
+    t.datetime "locked_until"
   end
 
   create_table "market_events", force: :cascade do |t|

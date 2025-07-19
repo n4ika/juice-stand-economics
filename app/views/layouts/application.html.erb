@@ -14,33 +14,36 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4">
       <div class="container">
         <%= link_to "Juice Stand Simulator", root_path, class: "navbar-brand" %>
+
         <!-- toggler omitted for brevity -->
+
         <div class="collapse navbar-collapse" id="navMenu">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <%= link_to "Dashboard", root_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Manage Juices", juices_path, class: "nav-link" %>
-            <li class="nav-item">
-              <%= link_to "Transactions", transactions_path, class: "nav-link" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Customers", customers_path, class: "nav-link" %>
-            </li>
+            <li class="nav-item"><%= link_to "Dashboard",  root_path,     class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Manage Juices", juices_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Transactions", transactions_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "Customers", customers_path, class: "nav-link" %></li>
           </ul>
         </div>
       </div>
     </nav>
 
-    <!-- Flash -->
-    <div id="flash-toast">
+    <!-- Happy‑Hour banner (below navbar) -->
+    <% if HappyHour.active? %>
+      <div
+        class="alert alert-success text-center small rounded-0 mb-0 happy-hour-banner">
+        🍹 <strong>Happy Hour!</strong> – all prices 10 % off, inflation easing…
+      </div>
+    <% end %>
+
+    <!-- Flash toast (absolute, auto‑dismiss) -->
+    <div id="flash-toast">         
       <turbo-frame id="flash">
-        <%= render 'shared/flash' %>
+        <%= render "shared/flash" %>
       </turbo-frame>
     </div>
 
-    <!-- Main content only -->
+    <!-- Main content -->
     <div class="container">
       <%= yield %>
     </div>

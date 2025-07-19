@@ -4,14 +4,13 @@
       <th>Flavor</th>
       <th>Price</th>
       <th>Popularity</th>
-      <th>Stock</th>          
+      <th>Stock</th>
       <th class="text-center">Sell</th>
     </tr>
   </thead>
-
   <tbody>
     <% juices.each do |juice| %>
-      <tr>
+      <tr class="<%= 'table-secondary' if juice.locked? %>">
         <td><%= juice.flavor %></td>
         <td><%= number_to_currency(juice.price) %></td>
         <td><%= juice.popularity %></td>
@@ -25,10 +24,16 @@
           <% end %>
         </td>
         <td class="text-center">
-          <%= button_to "Sell",
-                sell_juice_path(juice),
-                method: :post,
-                class: "btn btn-sm btn-success" %>
+          <% if juice.locked? %>
+            <span class="badge bg-danger">
+              Audit until <%= juice.locked_until.strftime("%H:%M:%S") %>
+            </span>
+          <% else %>
+            <%= button_to "Sell",
+                  sell_juice_path(juice),
+                  method: :post,
+                  class: "btn btn-sm btn-success" %>
+          <% end %>
         </td>
       </tr>
     <% end %>

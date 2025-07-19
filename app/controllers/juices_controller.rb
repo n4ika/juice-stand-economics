@@ -38,12 +38,36 @@ class JuicesController < ApplicationController
   end
 
   def sell
+    if @juice.locked?
+      remaining = ((@juice.locked_until - Time.current).ceil)
+      return redirect_back fallback_location: root_path,
+        alert: "#{@juice.flavor} is under audit—try again in #{remaining}s!"
+    end
+
     return redirect_back fallback_location: root_path,
                      alert: "#{@juice.flavor} is unavailable due to scarcity!" \
                    if @juice.scarcity_level >= ScarcityEngine::CRITICAL
 
     # --- Determine consequence and classify event type ---
     event_type, consequence, chaos_delta, infl_delta = RandomConsequence.pick
+
+    # cancel chaos bump during happy hour
+    if HappyHour.active?
+      chaos_delta = 0
+      infl_delta = -0.01
+    end
+    
+    # ——— audit event branch ———
+    if event_type == :audit
+      # freeze this juice for 30s
+      @juice.update!(locked_until: 30.seconds.from_now)
+      # spike chaos anyhow
+      Economy.bump_chaos!(chaos_delta)
+      flash.now[:alert] = "🚨🏛️ Government audit on #{@juice.flavor}! Sales paused 30 s."
+      # re‑render via Turbo
+      prepare_dashboard_streams
+      return
+    end
 
     # --- Spawn a complaining customer ---
     @customer = RandomCustomer.create!
@@ -56,6 +80,12 @@ class JuicesController < ApplicationController
 
     # --- Bump popularity ---
     @juice.increment!(:popularity)
+
+    # --- Happy Hour? ------------------------------------------------------
+    if HappyHour.active? && HappyHour.eligible?(@economy)
+      HappyHour.apply!(@economy)
+      flash.now[:notice] = "🎉 Happy Hour! Prices dropped 10 % & inflation eased by 2 %."
+    end
 
     # --- Apply economuc effects based on event type ---
     Economy.apply_sale!(chaos: chaos_delta, inflation: infl_delta)

@@ -36,12 +36,15 @@
     </div>
   </div>
 
-  <!-- ░░░ Juices Table ░░░ -->
-  <div class="row">
-    <div class="col-12">
-      <div id="juice-panel">
+ <!-- ░░░ Juices Table ░░░ -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">🍹 Current Juice Line‑up</div>
+      <%= turbo_frame_tag "juice-panel" do %>
         <%= render partial: "home/juices", locals: { juices: @juices } %>
-      </div>
+      <% end %>
     </div>
   </div>
 </div>
+

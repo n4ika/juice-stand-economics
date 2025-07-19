@@ -9,13 +9,16 @@ and watch the **economy implode** in real time.
 
 ## Features
 
-| Area                  | What happens                                                                             |
-| --------------------- | ---------------------------------------------------------------------------------------- |
-| **Sale simulation**   | Every sale triggers random consequences, bumps popularity, and nudges inflation & chaos. |
-| **Scarcity engine**   | Juices drift into scarcity or recover, dynamically raising global prices & inflation.    |
-| **Economy panel**     | Live chaos index, inflation %, rare‑event counter.                                       |
-| **Flash mayhem feed** | Turbo‑powered rolling log of riots, eldritch accountants, clown competitors…             |
-| **Customers**         | Randomly generated names, moods & complaints keep you humble.                            |
+| Area                  | What happens                                                                                    |
+| --------------------- | ----------------------------------------------------------------------------------------------- |
+| **Sale simulation**   | Every sale triggers random consequences, bumps popularity, and nudges inflation & chaos.        |
+| **Positive events**   | Rare “booster” events (peace treaty, bumper crop, viral dance…) calm chaos & reduce inflation.  |
+| **Gov Audit**         | 0.5 % chance of a government audit per sale: freezes a juice’s sales for 30 s and spikes chaos. |
+| **Happy Hour**        | Every hour for 15 minutes: 10 % off all juices, inflation eased, and chaos freezes on sales.    |
+| **Scarcity engine**   | Juices drift into scarcity or recover, dynamically raising global prices & inflation.           |
+| **Economy panel**     | Live chaos index, inflation %, rare‑event counter, and happy‑hour marker.                       |
+| **Flash mayhem feed** | Turbo‑powered rolling log of riots, eldritch accountants, audits… keeps you on your toes.       |
+| **Customers**         | Randomly generated names, moods & complaints keep you humble.                                   |
 
 ---
 
@@ -28,6 +31,7 @@ cd juice-stand-economics
 bundle install
 bin/rails db:setup  # loads seed data (12 juices, random economy)
 bin/rails s         # http://localhost:3000
+  # http://localhost:3000
 ```
 
 ## Roadmap / “help wanted”
@@ -49,4 +53,4 @@ notes.
 Rails 7.1 + Turbo + Stimulus + Bootstrap
 
 AI assistance (ChatGPT) used to craft the economy logic, scarcity
-engine & consequence generator.
+engine, positive boosters, Happy Hour & audit features.

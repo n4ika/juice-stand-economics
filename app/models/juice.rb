@@ -5,4 +5,8 @@ class Juice < ApplicationRecord
   validates :flavor, presence: true, uniqueness: true
   validates :price,  presence: true,
                      numericality: { greater_than: 0 }
+
+  def locked?
+    locked_until.present? && locked_until > Time.current
+  end
 end
